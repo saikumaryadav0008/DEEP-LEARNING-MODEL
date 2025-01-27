@@ -60,7 +60,7 @@ Here is a comparison of results:
 
 | **Existing Method**       | **Proposed Method**       |
 |---------------------------|---------------------------|
-| ![Existing](example1_existing.jpg) | ![Proposed](example1_proposed.jpg) |
+| ![Existing](output_video_existing.avi) | ![Proposed](output_video_proposed.avi) |
 
 ## Key Functions
 
