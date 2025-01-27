@@ -93,7 +93,7 @@ pip install numpy==1.21.6
 This project is inspired by the LIME and DUAL papers for illumination map refinement and multi-exposure fusion techniques.
 
 ## License
-This project is licensed under the MIT License.
+This project is licensed under the [MIT License](LICENSE).
 
 ---
 
