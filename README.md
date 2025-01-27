@@ -1,94 +1,100 @@
 # Deep Learning Powered Video Enhancement
 
-## Project Overview
-
-This project focuses on enhancing video quality using advanced deep learning and image processing techniques. It is specifically designed to improve visibility and atmospheric conditions in videos, making them clearer and more vibrant under challenging environments such as low light or haze.
+This project utilizes deep learning techniques to enhance video visibility under challenging atmospheric conditions, improving both underexposure and overexposure issues.
 
 ## Features
+- **Exposure Enhancement**: Corrects both underexposed and overexposed areas in frames using advanced algorithms like LIME and DUAL.
+- **Spatial Affinity Optimization**: Applies Gaussian-based spatial affinity weights for refined illumination.
+- **Multi-Exposure Fusion**: Enhances videos by fusing multiple exposure-corrected versions.
+- **Video Processing**: Accepts videos as input and produces enhanced videos as output.
 
-- **Exposure Correction**: Adjusts both underexposed and overexposed areas in video frames.
-- **Multi-Exposure Fusion**: Uses Mertens' fusion technique for seamless blending of exposure corrections.
-- **Illumination Map Optimization**: Refines brightness adjustments for natural-looking enhancements.
-- **Customizable Parameters**: Allows control over contrast, saturation, and other visual properties.
-- **Comparative Results**: Provides visual comparisons between existing and proposed enhancement methods.
+## Methods
+### Existing
+The **existing method** relies on traditional video processing techniques, which may lack precision under extreme atmospheric conditions. The output for the existing method can be found in:
+- **`output_video_existing.avi`**
+
+### Proposed
+The **proposed method** leverages advanced deep learning algorithms like LIME and DUAL for improved video enhancement. It refines illumination maps and fuses exposure-corrected versions for superior visibility. The output for the proposed method is available in:
+- **`output_video_proposed.avi`**
 
 ## Project Structure
-
-```plaintext
+```
 .
-├── utils.py                      # Utility functions for matrix operations
-├── exposure_enhancement.py       # Core algorithms for video enhancement
-├── Main_video.ipynb              # Jupyter notebook for video processing and visualization
-├── output_video_existing.avi     # Output video from existing enhancement methods
-├── output_video_proposed.avi     # Output video from the proposed enhancement method
+├── input_videos/           # Directory for input videos
+├── input_frames/           # Extracted frames from input videos
+├── output_videos/          # Directory for enhanced videos
+├── output_frames/          # Frames from enhanced videos
+├── utils.py                # Utility functions, including neighbor calculation
+├── exposure_enhancement.py # Core image and video enhancement functions
+├── main_image.ipynb        # Notebook for testing image-based enhancement
+├── Main_video.ipynb        # Notebook for video-based enhancement
+└── requirements.txt        # Python dependencies
 ```
 
 ## Installation
-
 1. Clone the repository:
    ```bash
-   git clone https://github.com/your_username/video-enhancement.git
+   git clone https://github.com/your_username/deep-video-enhancement.git
+   cd deep-video-enhancement
    ```
-2. Install the required dependencies:
+2. Create a virtual environment and activate it:
+   ```bash
+   python -m venv venv
+   source venv/bin/activate   # On Windows: venv\Scripts\activate
+   ```
+3. Install the required dependencies:
    ```bash
    pip install -r requirements.txt
    ```
 
 ## Usage
+### Image Enhancement
+1. Open the `main_image.ipynb` notebook.
+2. Run the cells to test enhancement on sample images.
 
-### 1. Enhance Videos
-Run the `Main_video.ipynb` notebook to process and enhance videos step by step. This notebook demonstrates the use of the enhancement functions and visualizes the results.
+### Video Enhancement
+1. Place your videos in the `input_videos` directory.
+2. Open the `Main_video.ipynb` notebook.
+3. Run the cells to process videos and save the results in `output_videos`.
 
-### 2. Enhance Images
-Use the `exposure_enhancement.py` script for image processing:
-- Key function: `enhance_image_exposure`
-  ```python
-  enhance_image_exposure(im, gamma, lambda_, dual=True, sigma=3, bc=1, bs=1, be=1)
-  ```
-  - `im`: Input image
-  - `gamma`, `lambda_`: Parameters for brightness and contrast
-  - `dual`: Whether to use DUAL (True) or LIME (False) methods
-  - `sigma`: Gaussian weight for spatial affinity
-  - `bc`, `bs`, `be`: Weights for contrast, saturation, and well-exposedness
+### Core Functions
+The `exposure_enhancement.py` file contains the core functions:
+- `enhance_image_exposure`: Main function for enhancing image exposure.
+- `correct_underexposure`: Corrects underexposed regions.
+- `fuse_multi_exposure_images`: Fuses corrected underexposure and overexposure maps.
+- `create_spacial_affinity_kernel`: Builds the spatial affinity kernel for refinement.
 
-### 3. Compare Results
-- View `output_video_existing.avi` and `output_video_proposed.avi` for a side-by-side comparison of video enhancement methods.
+### Example Command
+```python
+from exposure_enhancement import enhance_image_exposure
+import cv2
 
-## Examples
+image = cv2.imread('path_to_image.jpg')
+enhanced_image = enhance_image_exposure(image, gamma=2.2, lambda_=0.5)
+cv2.imwrite('enhanced_image.jpg', enhanced_image)
+```
 
-Here is a comparison of results:
+## Dependencies
+- Python 3.8+
+- OpenCV
+- NumPy
+- SciPy
 
-| **Existing Method**       | **Proposed Method**       |
-|---------------------------|---------------------------|
-| ![Existing](https://github.com/saikumaryadav0008/DEEP-LEARNING-MODEL/blob/main/input_frame_1.png) | ![Proposed](https://github.com/saikumaryadav0008/DEEP-LEARNING-MODEL/blob/main/output_frame_1.png) |
+Install dependencies with:
+```bash
+pip install numpy==1.21.6
+```
 
-## Key Functions
-
-- **`create_spacial_affinity_kernel`**: Generates Gaussian kernels for spatial weights.
-- **`fuse_multi_exposure_images`**: Combines images with different exposures for optimal visual quality.
-- **`refine_illumination_map_linear`**: Refines the brightness adjustment using optimization techniques.
-- **`correct_underexposure`**: Corrects dim areas in images using retinex-based algorithms.
-- **`enhance_image_exposure`**: Main function for exposure and illumination enhancement.
-
-## Results
-
-The proposed method significantly improves visibility and clarity in challenging conditions, such as:
-- Low-light scenes
-- Foggy or hazy environments
-- Backlit subjects
-
-## Future Work
-
-- Incorporate real-time processing using deep learning models.
-- Extend support to extreme environmental conditions like rain or snow.
-- Optimize performance for high-resolution videos.
+## Outputs
+- **`output_video_existing.avi`**: Enhanced video using the existing method.
+- **`output_video_proposed.avi`**: Enhanced video using the proposed method.
 
 ## References
+This project is inspired by the LIME and DUAL papers for illumination map refinement and multi-exposure fusion techniques.
 
-1. **DUAL Method**: A multi-exposure fusion-based approach for video enhancement.
-2. **LIME Method**: Illumination map optimization for enhancing visual quality in natural videos.
+## License
+This project is licensed under the MIT License.
 
 ---
 
-Feel free to contribute to this project by submitting issues or pull requests. Together, let's make videos clearer and more visually stunning!
-
+Let me know if you’d like further refinements or additions!
