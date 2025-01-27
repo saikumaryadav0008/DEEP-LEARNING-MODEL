@@ -60,7 +60,7 @@ Here is a comparison of results:
 
 | **Existing Method**       | **Proposed Method**       |
 |---------------------------|---------------------------|
-| ![Existing](https://github.com/saikumaryadav0008/DEEP-LEARNING-MODEL/blob/main/input_frame_1.png) | ![Proposed](output_video_proposed.avi) |
+| ![Existing](https://github.com/saikumaryadav0008/DEEP-LEARNING-MODEL/blob/main/input_frame_1.png) | ![Proposed]([output_video_proposed.avi](https://github.com/saikumaryadav0008/DEEP-LEARNING-MODEL/blob/main/output_frame_1.png)) |
 
 ## Key Functions
 
